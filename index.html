@@ -1,0 +1,75 @@
+
+
+
+<head>
+    <title>Air Technology Conference</title>
+    <link rel = "icon" href = "logo.JPG" type = "image/x-icon">
+
+    <style>
+    html, body{
+        background-image: url('logo.JPG');
+        background-color: #ffffff;
+        background-repeat: no-repeat;
+        background-position: 50%  80%;
+        font-family: Arial, Helvetica, sans-serif;
+        background-size: 40% 70%;        
+    }
+    button {
+        border: none;
+        color: rgb(0, 0, 0);
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #F26627;
+        border-radius: 8px;
+        justify-content: center;
+        position: absolute;
+        left:45%;
+      }
+    p{
+        text-align: center;
+    }
+    </style>
+  <script src='api.js'></script>
+ 
+</head>
+<body>
+<p>Click on the button to start your conference</p>
+<button id="start" type="button">Start</button>
+<div id="jitsi-container">
+</div>
+<script> </script>
+
+<script>
+var button = document.querySelector('#start');
+var container = document.querySelector('#jitsi-container');
+var api = null;
+
+
+button.addEventListener('click', () => {
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var stringLength = 30;
+
+    function pickRandom() {
+    return possible[Math.floor(Math.random() * possible.length)];
+    }
+
+var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
+
+    var domain = "meet.jit.si";
+    var options = {
+        "roomName": randomString,
+        "parentNode": container,
+        "width": 600,
+        "height": 600,
+    };
+    api = new JitsiMeetExternalAPI(domain, options);
+});
+
+</script>
+</body>
+</html>
